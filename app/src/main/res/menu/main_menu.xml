@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menu_show_total_day_time"
+        android:title="Общее время">
+    </item>
+    <item
+        android:id="@+id/menu_item_choose_user"
+        android:title="Выбрать пользователя">
+    </item>
+    <item
+        android:id="@+id/menu_item_submit_activities_time"
+        android:title="Отправить результат">
+    </item>
+    <item
+        android:id="@+id/menu_item_submit_refresh"
+        android:title="Обновить">
+    </item>
+</menu>
