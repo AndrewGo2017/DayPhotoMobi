@@ -44,7 +44,9 @@ public class FinishedActivityHandler {
         long seconds = 0;
         for (FinishedActivity finishedActivity : finishedActivities) {
             if (finishedActivity.getToday().get(Calendar.DAY_OF_YEAR) == Calendar.getInstance().get(Calendar.DAY_OF_YEAR)) {
-                seconds += finishedActivity.getTimeInSeconds();
+                if (finishedActivity.getUser() == CurrentUser.getInstance().getUser()){
+                    seconds += finishedActivity.getTimeInSeconds();
+                }
             }
         }
         return TimerHandler.format(seconds);

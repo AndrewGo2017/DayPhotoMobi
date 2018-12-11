@@ -2,6 +2,7 @@ package ru.sbrf.android.dayphoto;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -169,7 +170,7 @@ public class MainActivity extends AppCompatActivity {
                             for (FinishedActivity finishedActivity : finishedActivitiesCommitted) {
                                 //    @DateTimeFormat(pattern = "dd-MM-yyyy")
                                 //    @DateTimeFormat(pattern = "HH:mm:ss")
-                                String date = CommonUtil.CalendarToString(finishedActivity.getToday());
+                                String date = CommonUtil.calendarToString(finishedActivity.getToday());
                                 String time = TimerHandler.format(finishedActivity.getTimeInSeconds());
 
                                 Statistic statistic = new Statistic(CurrentUser.getInstance().getUser(), finishedActivity.getActivity(), date, time);
@@ -197,9 +198,16 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             case R.id.menu_item_close_all_activities:
                 TimerHandler timerHandler = TimerHandler.getCurrentInstance();
-                if (timerHandler != null){
+                if (timerHandler != null) {
                     timerHandler.destroy();
                 }
+
+                final AlertDialog loadDialog = new LoadEffectDialog(this, R.layout.dialog, "Остановка активностей...").createDialog();
+                loadDialog.show();
+
+                CommonUtil.delayedClose(loadDialog, 1000);
+
+
             default:
                 return super.onOptionsItemSelected(item);
         }

@@ -15,6 +15,7 @@ import ru.sbrf.android.dayphoto.common.LoadEffectHandler;
 import ru.sbrf.android.dayphoto.controller.ActivityGetController;
 import ru.sbrf.android.dayphoto.model.Activity;
 import ru.sbrf.android.dayphoto.model.ActivityGroup;
+import ru.sbrf.android.dayphoto.util.CommonUtil;
 
 public class ActivityDetail extends AppCompatActivity {
     private LoadEffectHandler loadEffectHandler;
@@ -78,22 +79,24 @@ public class ActivityDetail extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    Thread.sleep(2000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        dialog.dismiss();
-                    }
-                });
-            }
-        }).start();
+        CommonUtil.delayedClose(dialog, 2000);
+
+//        new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//                try {
+//                    Thread.sleep(2000);
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                }
+//                runOnUiThread(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        dialog.dismiss();
+//                    }
+//                });
+//            }
+//        }).start();
     }
 
 //    private void startActivity(AppCompatActivity context, Activity activity){
