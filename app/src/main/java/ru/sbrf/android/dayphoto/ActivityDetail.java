@@ -68,16 +68,45 @@ public class ActivityDetail extends AppCompatActivity {
     }
 
     private void startActivity(AppCompatActivity context, Activity activity){
-        TimerHandler timerHandler = new TimerHandler();
-        AlertDialog dialog = new ActivityInProgressDialog(context, R.layout.dialog, timerHandler, activity).createDialog();
+        TimerHandler timerHandler = TimerHandler.getNewInstance(activity);
+        final AlertDialog dialog = new ActivityInProgressDialog(context, R.layout.dialog, timerHandler, false).createDialog();
         dialog.show();
-        timerHandler.setAlertDialog(dialog);
 
         try {
             timerHandler.goTimer();
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        dialog.dismiss();
+                    }
+                });
+            }
+        }).start();
     }
+
+//    private void startActivity(AppCompatActivity context, Activity activity){
+//        TimerHandler timerHandler = new TimerHandler();
+//        AlertDialog dialog = new ActivityInProgressDialog(context, R.layout.dialog, timerHandler, activity).createDialog();
+//        dialog.show();
+//        timerHandler.setAlertDialog(dialog);
+//
+//        try {
+//            timerHandler.goTimer();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
 
 }

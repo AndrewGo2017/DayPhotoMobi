@@ -11,9 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
-
 import ru.sbrf.android.dayphoto.common.CurrentUser;
 import ru.sbrf.android.dayphoto.common.LoadEffectHandler;
 import ru.sbrf.android.dayphoto.common.Preferences;
@@ -23,6 +20,7 @@ import ru.sbrf.android.dayphoto.controller.ActivityGetController;
 import ru.sbrf.android.dayphoto.controller.ActivityGroupGetController;
 import ru.sbrf.android.dayphoto.controller.StatisticController;
 import ru.sbrf.android.dayphoto.controller.UserGetController;
+import ru.sbrf.android.dayphoto.dialog.ActivityInProgressDialog;
 import ru.sbrf.android.dayphoto.dialog.LoadEffectDialog;
 import ru.sbrf.android.dayphoto.dialog.TotalActivityTimeDialog;
 import ru.sbrf.android.dayphoto.dialog.UsersDialog;
@@ -34,7 +32,6 @@ import ru.sbrf.android.dayphoto.util.CommonUtil;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -193,6 +190,16 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }).start();
                 return true;
+            case R.id.menu_show_current_activity:
+                TimerHandler currentTimerHandler = TimerHandler.getCurrentInstance();
+                final AlertDialog dialog = new ActivityInProgressDialog(this, R.layout.dialog, currentTimerHandler, true).createDialog();
+                dialog.show();
+                return true;
+            case R.id.menu_item_close_all_activities:
+                TimerHandler timerHandler = TimerHandler.getCurrentInstance();
+                if (timerHandler != null){
+                    timerHandler.destroy();
+                }
             default:
                 return super.onOptionsItemSelected(item);
         }
