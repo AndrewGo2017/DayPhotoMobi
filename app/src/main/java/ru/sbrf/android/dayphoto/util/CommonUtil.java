@@ -17,7 +17,8 @@ public class CommonUtil {
 
     public static String calendarToString(Calendar calendar){
         String day = Integer.toString(calendar.get(Calendar.DAY_OF_MONTH));
-        String month = Integer.toString(calendar.get(Calendar.MONTH)) + 1;
+        String month = Integer.toString(calendar.get(Calendar.MONTH) + 1);
+
         String year = Integer.toString(calendar.get(Calendar.YEAR));
 
         day = day.length() < 2 ? ("0" + day) : day;

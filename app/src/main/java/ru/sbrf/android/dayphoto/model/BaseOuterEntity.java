@@ -25,4 +25,19 @@ public class BaseOuterEntity extends BaseEntity {
     public void setId(long id) {
         this.id = id;
     }
+
+
+    @Override
+    public boolean equals(Object o){
+        if (this == o) return true;
+        if (o == null) return false;
+        if (getClass() != o.getClass()) return false;
+        BaseOuterEntity baseEntity = (BaseOuterEntity) o;
+        return id == (baseEntity.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Long.hashCode(id);
+    }
 }

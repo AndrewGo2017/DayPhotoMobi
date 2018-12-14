@@ -25,6 +25,7 @@ import ru.sbrf.android.dayphoto.dialog.ActivityInProgressDialog;
 import ru.sbrf.android.dayphoto.dialog.LoadEffectDialog;
 import ru.sbrf.android.dayphoto.dialog.TotalActivityTimeDialog;
 import ru.sbrf.android.dayphoto.dialog.UsersDialog;
+import ru.sbrf.android.dayphoto.model.Activity;
 import ru.sbrf.android.dayphoto.model.ActivityGroup;
 import ru.sbrf.android.dayphoto.model.FinishedActivity;
 import ru.sbrf.android.dayphoto.model.Statistic;
@@ -183,8 +184,10 @@ public class MainActivity extends AppCompatActivity {
                             }
 
                             settingHandler.saveSettingList("finishedActivitiesCommitted", null);
+                            settingHandler.saveSettingList("finishedActivity", null);
                             if (errorList.size() > 0) {
                                 settingHandler.saveSettingList("finishedActivitiesCommitted", errorList);
+                                settingHandler.saveSettingList("finishedActivity", errorList);
                             }
                         }
                         submitLoadEffectDialog.dismiss();

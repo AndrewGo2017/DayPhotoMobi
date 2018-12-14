@@ -39,7 +39,10 @@ public class ActivityInProgressDialog extends BaseDialog {
         if (timerHandler == null){
             alertDialog.setTitle("Не начата ни одна активность.");
         } else{
-            alertDialog.setTitle(timerHandler.getActivity().getActivityGroup().getName().substring(0, 22) + "\n" + timerHandler.getActivity().getName());
+            String name = timerHandler.getActivity().getActivityGroup().getName();
+            if (name.length() > 22)
+                name = name.substring(0, 22);
+            alertDialog.setTitle(name + "\n" + timerHandler.getActivity().getName());
             alertDialog.setMessage("");
             timerHandler.setAlertDialog(alertDialog);
             new LoadEffectHandler(getLayoutInflater(), getDialogViewGroup(), "").show();

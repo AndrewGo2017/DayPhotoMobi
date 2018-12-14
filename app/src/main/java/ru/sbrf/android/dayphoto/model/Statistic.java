@@ -3,6 +3,8 @@ package ru.sbrf.android.dayphoto.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import ru.sbrf.android.dayphoto.to.StatisticTo;
+
 public class Statistic extends BaseEntity {
 
     @Expose
@@ -65,4 +67,5 @@ public class Statistic extends BaseEntity {
     public void setTime(String time) {
         this.time = time;
     }
+
 }
